@@ -1,0 +1,3 @@
+[submodule "Plugins/HttpServerPlugin"]
+	path = Plugins/HttpServerPlugin
+	url = https://github.com/lpestl/HttpServerPlugin.git
