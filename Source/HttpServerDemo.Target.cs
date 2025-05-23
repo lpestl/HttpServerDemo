@@ -9,6 +9,7 @@ public class HttpServerDemoTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
 
 		ExtraModuleNames.AddRange( new string[] { "HttpServerDemo" } );
 	}
