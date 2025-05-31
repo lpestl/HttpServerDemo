@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HttpServer.h"
+#include "HttpInputReceiver.h"
 #include "GameFramework/PlayerController.h"
 #include "HttpPlayerController.generated.h"
 
@@ -26,5 +26,5 @@ public:
 	
 private:
 	UPROPERTY(EditAnywhere)
-	UHttpServer* HttpInputReceiver { nullptr };
+	UHttpInputReceiver* HttpInputReceiver { nullptr };
 };
