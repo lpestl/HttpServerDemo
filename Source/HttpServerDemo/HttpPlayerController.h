@@ -24,7 +24,12 @@ public:
 	UFUNCTION()
 	void OnRecevedHttpInput(const FString& RequestBody, FEndpointData EndpointData);
 	
+	virtual void Tick(float DeltaSeconds) override;
+
 private:
 	UPROPERTY(EditAnywhere)
 	UHttpInputReceiver* HttpInputReceiver { nullptr };
+	
+	bool bMovePressed { false };
+	float MoveScale { 0.f };
 };

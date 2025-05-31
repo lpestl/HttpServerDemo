@@ -39,14 +39,36 @@ void AHttpPlayerController::OnRecevedHttpInput(const FString& RequestBody, FEndp
 {
 	if (IsValid(GetCharacter()))
 	{
-		if (EndpointData.Endpoint.Contains(TEXT("/up/pressed"))){}
-		else if (EndpointData.Endpoint.Contains(TEXT("/up/released"))){}
+		if (EndpointData.Endpoint.Contains(TEXT("/up/pressed")))
+		{
+			GetCharacter()->Jump();
+		}
+		else if (EndpointData.Endpoint.Contains(TEXT("/up/released")))
+		{
+			GetCharacter()->StopJumping();
+		}
 		else if (EndpointData.Endpoint.Contains(TEXT("/down/pressed"))){}
 		else if (EndpointData.Endpoint.Contains(TEXT("/down/released"))){}
-		else if (EndpointData.Endpoint.Contains(TEXT("/left/pressed"))){}
-		else if (EndpointData.Endpoint.Contains(TEXT("/left/released"))){}
-		else if (EndpointData.Endpoint.Contains(TEXT("/right/pressed"))){}
-		else if (EndpointData.Endpoint.Contains(TEXT("/right/released"))){}
+		else if (EndpointData.Endpoint.Contains(TEXT("/left/pressed")))
+		{
+			bMovePressed = true;
+			MoveScale = 1.f;
+		}
+		else if (EndpointData.Endpoint.Contains(TEXT("/left/released")))
+		{
+			bMovePressed = false;
+			MoveScale = 0.f;
+		}
+		else if (EndpointData.Endpoint.Contains(TEXT("/right/pressed")))
+		{
+			bMovePressed = true;
+			MoveScale = -1.f;
+		}
+		else if (EndpointData.Endpoint.Contains(TEXT("/right/released")))
+		{
+			bMovePressed = false;
+			MoveScale = 0.f;
+		}
 		else if (EndpointData.Endpoint.Contains(TEXT("/a-button/pressed")))
 		{
 			GetCharacter()->Jump();
@@ -57,5 +79,15 @@ void AHttpPlayerController::OnRecevedHttpInput(const FString& RequestBody, FEndp
 		}
 		else if (EndpointData.Endpoint.Contains(TEXT("/b-button/pressed"))){}
 		else if (EndpointData.Endpoint.Contains(TEXT("/b-button/released"))){}
+	}
+}
+
+void AHttpPlayerController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (bMovePressed && IsValid(GetCharacter()))
+	{
+		GetCharacter()->AddMovementInput(FVector(0.0f, 1.0f, 0.0f), MoveScale);
 	}
 }
